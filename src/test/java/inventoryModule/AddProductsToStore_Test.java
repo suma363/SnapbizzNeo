@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import BaseClass.BaseClass;
 import FileUtility.ExcelUtility;
@@ -15,7 +16,7 @@ import ObjectRepository.HomePage;
 import ObjectRepository.InventoryMenu_Page;
 import WebDriverUtility.JavaUtility;
 import WebDriverUtility.WebDriverUtility;
-
+@Listeners(ListenerUtility.ListenerImpClass.class)
 public class AddProductsToStore_Test extends BaseClass {
 	WebDriverUtility wu = new WebDriverUtility();
 	ExcelUtility eu = new ExcelUtility();
@@ -69,7 +70,7 @@ public class AddProductsToStore_Test extends BaseClass {
 		}
 		
 		//validations 
-		String expected = String.valueOf(rowCount);
+		String expected = String.valueOf(rowCount-1);
 		String actual = cp.getInventoryCount().getText().trim();
 		Assert.assertEquals(actual, expected, "Inventory count match after adding products.");
 

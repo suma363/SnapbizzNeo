@@ -3,16 +3,16 @@ package BaseClass;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import ObjectRepository.DashboardPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
-
+import WebDriverUtility.UtilityClassObject;
 import DataBaseUtility.DataBaseClass;
 import FileUtility.ExcelUtility;
 import FileUtility.FileUtility;
-import ObjectRepository.DashboardPage;
 import ObjectRepository.LoginPage;
 import WebDriverUtility.JavaUtility;
 import WebDriverUtility.WebDriverUtility;
@@ -30,7 +30,7 @@ public class BaseClass {
 				
 		@BeforeSuite(groups = {"smokeTest", "regressionTest"})
 		public void configBS() throws SQLException {
-//			System.out.println("===Connect to DB , Report Config ====");
+			System.out.println("=== Report Config ====");
 //			dbLib.getConnection();
 //			
 		}
@@ -49,9 +49,10 @@ public class BaseClass {
 			} else {
 				driver = new ChromeDriver();
 			}
-//			sdriver = driver;
-//			UtilityClassObject.setdriver(driver);
-//			
+			sdriver = driver;
+
+  		   UtilityClassObject.setDriver(driver);
+
 		}
 		
 		/**@Parameters("BROWSER")
@@ -82,19 +83,19 @@ public class BaseClass {
 			LoginPage lp = new LoginPage(driver);
 			lp.loginToApp(URL, USERNAME, PASSWORD);
 		}
-//		
-//		@AfterMethod(groups = {"smokeTest", "regressionTest"})
-//		public void configAM() {
-//			System.out.println("Logout");
-//			DashboardPage dp = new DashboardPage(driver);
-//			dp.logout();	
-//		}
-//		
-//		@AfterClass(groups = {"smokeTest", "regressionTest"})
-//		public void configAC() {
-//			System.out.println("===Close the browser===");
-//			driver.quit();
-//		}
+
+		@AfterMethod(groups = {"smokeTest", "regressionTest"})
+		public void configAM() {
+			System.out.println("Logout");
+			DashboardPage dp = new DashboardPage(driver);
+			dp.logout();
+		}
+
+		@AfterClass(groups = {"smokeTest", "regressionTest"})
+		public void configAC() {
+			System.out.println("===Close the browser===");
+			driver.quit();
+		}
 		
 		@AfterSuite(groups = {"smokeTest", "regressionTest"})
 		public void configAS() throws SQLException {

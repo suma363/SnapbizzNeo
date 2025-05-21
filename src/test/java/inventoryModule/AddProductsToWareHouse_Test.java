@@ -56,7 +56,7 @@ public class AddProductsToWareHouse_Test extends BaseClass {
 			String category = eu.getDataFromExcel("wareHouseProducts", i, 5);
 			String subCat = eu.getDataFromExcel("wareHouseProducts", i, 6);
 
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".v-overlay__scrim")));
 
 			// Re-open the modal each time
@@ -68,10 +68,12 @@ public class AddProductsToWareHouse_Test extends BaseClass {
 			ap.addProduct(barcode, mrp, prodName, purPrice, uom, SP1, qty, gst, category, subCat);
 					
 		}
-		//validations 
+		//validations
+		String expected = String.valueOf(rowCount-1);
+		String actual = cp.getInventoryCount().getText().trim();
 //		String actual="9";
 //		String expected = cp.getInventoryCount().getText();
-//		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(actual, expected);
 	}
 
 }

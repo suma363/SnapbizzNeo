@@ -32,8 +32,9 @@ public void waitForPageLoad(WebDriver driver) {
 
 	public void waitForElementtobeClickable(WebDriver driver, WebElement element) {
 		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
+		
 	}
 	
    public void waitForElementtobeSelected(WebDriver driver, WebElement element) {
@@ -200,5 +201,18 @@ public void waitForPageLoad(WebDriver driver) {
 			int y = element.getLocation().getY();
 			js.executeScript("window.scrollBy(0,"+y+");");
 		}
+
+	public void slowType(WebElement element, String text, int delayInMillis) {
+		element.clear();
+		for (char ch : text.toCharArray()) {
+			element.sendKeys(String.valueOf(ch));
+			try {
+				Thread.sleep(delayInMillis);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt(); // Best practice
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

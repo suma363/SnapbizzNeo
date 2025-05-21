@@ -1,5 +1,6 @@
 package ObjectRepository;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +18,6 @@ public class CataloguePage {
 		@FindBy(xpath="//ancestor::div[@class='v-input__control']/descendant::*[local-name()='svg']")
 		private WebElement selectStoreIdDrpdwn;
 
-		
 		@FindBy(xpath="//div[contains(text(),'92793-Suma test store')]")
 		private WebElement storeOption;
 		
@@ -33,9 +33,27 @@ public class CataloguePage {
 		@FindBy(xpath = "//input[@class='v-field__input']")
 		private WebElement searchProduct;
 
-		
+		@FindBy(xpath = "//*[local-name()='svg'  and @class='pc-icon primary']")
+		private WebElement editProdBtn;
 
-		public WebElement getWareHouseOption() {
+		@FindBy(xpath = "//span[text()='Delete ']")
+		private WebElement confDelProdBtn;
+
+
+	public WebElement getDeleteBtn(String barcode) {
+		String xpath="//td[text()='"+barcode+"']/ancestor::tr/descendant::*[local-name()='svg' and @class='pc-icon']";
+		return driver.findElement(By.xpath(xpath));
+	}
+
+	public WebElement getEditProdBtn() {
+		return editProdBtn;
+	}
+
+	public WebElement getConfDelProdBtn() {
+		return confDelProdBtn;
+	}
+
+	public WebElement getWareHouseOption() {
 			return wareHouseOption;
 		}
 
@@ -58,8 +76,7 @@ public class CataloguePage {
 		public WebElement getSearchProduct() {
 			return searchProduct;
 		}
-		
-		
-		
-		
+
+
+
 }

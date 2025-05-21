@@ -55,6 +55,9 @@ public class AddProducts_Page {
 	@FindBy(xpath = "//span[text()='Cancel ']")
 	private WebElement cancelBtn;
 
+	@FindBy(xpath = "//span[text()='Update ']")
+	private WebElement UpdateBtn;
+
 	public WebElement getBarcodeTxtBox() {
 		return barcodeTxtBox;
 	}
@@ -103,6 +106,7 @@ public class AddProducts_Page {
 		return cancelBtn;
 	}
 
+
 	// Action
 	public void addProduct(String barcode, String mrp, String prodName, String purPrice, String uom, String SP1,
 			String qty, String gst, String catogory, String subCat) throws Throwable {
@@ -133,7 +137,6 @@ public class AddProducts_Page {
 		getQtyTxtBox().sendKeys(Keys.CONTROL, "a", Keys.DELETE);;
 		getQtyTxtBox().sendKeys(qty);
 
-		
 		getGstDropDown().click();;
 		getGstDropDown().sendKeys(gst);
 		getGstDropDown().sendKeys(Keys.ENTER);

@@ -6,28 +6,28 @@
     <groups>
     </groups>
     <test started-at="2025-05-16T12:21:11 IST" name="Default test" finished-at="2025-05-16T12:21:28 IST" duration-ms="17338">
-      <class name="inventoryModule.EditProducts_Test">
-        <test-method is-config="true" signature="configBS()[pri:0, instance:inventoryModule.EditProducts_Test@54c5a2ff]" started-at="2025-05-16T12:21:11 IST" name="configBS" finished-at="2025-05-16T12:21:11 IST" duration-ms="15" status="PASS">
+      <class name="inventoryModule.EditAndDeleteWareHouseProduct_Test">
+        <test-method is-config="true" signature="configBS()[pri:0, instance:inventoryModule.EditAndDeleteWareHouseProduct_Test@54c5a2ff]" started-at="2025-05-16T12:21:11 IST" name="configBS" finished-at="2025-05-16T12:21:11 IST" duration-ms="15" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configBS -->
-        <test-method is-config="true" signature="configBC()[pri:0, instance:inventoryModule.EditProducts_Test@54c5a2ff]" started-at="2025-05-16T12:21:11 IST" name="configBC" finished-at="2025-05-16T12:21:13 IST" duration-ms="1980" status="PASS">
+        <test-method is-config="true" signature="configBC()[pri:0, instance:inventoryModule.EditAndDeleteWareHouseProduct_Test@54c5a2ff]" started-at="2025-05-16T12:21:11 IST" name="configBC" finished-at="2025-05-16T12:21:13 IST" duration-ms="1980" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configBC -->
-        <test-method is-config="true" signature="configBM()[pri:0, instance:inventoryModule.EditProducts_Test@54c5a2ff]" started-at="2025-05-16T12:21:13 IST" name="configBM" finished-at="2025-05-16T12:21:15 IST" duration-ms="2447" status="PASS">
+        <test-method is-config="true" signature="configBM()[pri:0, instance:inventoryModule.EditAndDeleteWareHouseProduct_Test@54c5a2ff]" started-at="2025-05-16T12:21:13 IST" name="configBM" finished-at="2025-05-16T12:21:15 IST" duration-ms="2447" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configBM -->
-        <test-method signature="editProduct()[pri:0, instance:inventoryModule.EditProducts_Test@54c5a2ff]" started-at="2025-05-16T12:21:15 IST" name="editProduct" finished-at="2025-05-16T12:21:28 IST" duration-ms="12850" status="PASS">
+        <test-method signature="editProduct()[pri:0, instance:inventoryModule.EditAndDeleteWareHouseProduct_Test@54c5a2ff]" started-at="2025-05-16T12:21:15 IST" name="editProduct" finished-at="2025-05-16T12:21:28 IST" duration-ms="12850" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- editProduct -->
-        <test-method is-config="true" signature="configAS()[pri:0, instance:inventoryModule.EditProducts_Test@54c5a2ff]" started-at="2025-05-16T12:21:28 IST" name="configAS" finished-at="2025-05-16T12:21:28 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="configAS()[pri:0, instance:inventoryModule.EditAndDeleteWareHouseProduct_Test@54c5a2ff]" started-at="2025-05-16T12:21:28 IST" name="configAS" finished-at="2025-05-16T12:21:28 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configAS -->
-      </class> <!-- inventoryModule.EditProducts_Test -->
+      </class> <!-- inventoryModule.EditAndDeleteWareHouseProduct_Test -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

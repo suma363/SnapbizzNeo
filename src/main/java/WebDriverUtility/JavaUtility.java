@@ -9,7 +9,7 @@ public class JavaUtility {
 	
 	public int getRandomNumber() {
 		Random random = new Random();
-		int randomNumber = random.nextInt(500);
+		int randomNumber = random.nextInt(700);
 		return randomNumber;
 				
 	}

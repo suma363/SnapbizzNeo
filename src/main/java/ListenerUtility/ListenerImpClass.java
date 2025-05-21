@@ -1,7 +1,10 @@
 package ListenerUtility;
 
+import java.io.File;
 import java.util.Date;
 
+import BaseClass.BaseClass;
+import WebDriverUtility.UtilityClassObject;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ISuite;
@@ -19,7 +22,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ListenerImpClass implements ITestListener, ISuiteListener {
 
 	
-	/**public static ExtentReports report;
+/**	public static ExtentReports report;
 	public static ExtentTest test;
 
 	@Override
@@ -30,14 +33,14 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 
 		// Spark report config
 		ExtentSparkReporter spark = new ExtentSparkReporter("./AdvanceReport/report"+time+".html");
-		spark.config().setDocumentTitle("CRM Test Suite Results");
-		spark.config().setReportName("CRM Report");
+		spark.config().setDocumentTitle("WareHousePortal Report");
+		spark.config().setReportName("WHP Report");
 		spark.config().setTheme(Theme.DARK);
 
 		// add envi information and create test
 		report = new ExtentReports();
 		report.attachReporter(spark);
-		report.setSystemInfo("OS", "Windows-10");
+		report.setSystemInfo("OS", "Windows-7");
 		report.setSystemInfo("BROWSER", "CHROME-100");
 	}
 
@@ -52,7 +55,7 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	public void onTestStart(ITestResult result) {
 		System.out.println("=======>" + result.getMethod().getMethodName() + ">=====START====");
 		test = report.createTest(result.getMethod().getMethodName());
-//		UtilityClassObject.setTest(test);
+		UtilityClassObject.setTest(test);
 		test.log(Status.INFO, result.getMethod().getMethodName()+"===>STARTED<===");
 
 	}
@@ -68,7 +71,7 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	public void onTestFailure(ITestResult result) {		
 		String testName = result.getMethod().getMethodName();		
 		// Take screenshot
-		TakesScreenshot edriver = (TakesScreenshot) Base.sdriver;
+		TakesScreenshot edriver = (TakesScreenshot) BaseClass.sdriver;
 		String filePath = edriver.getScreenshotAs(OutputType.BASE64);
 
 		String time = new Date().toString().replace(" ", "").replace(":", "");
@@ -78,8 +81,6 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 		test.log(Status.FAIL, result.getMethod().getMethodName()+"===>FAILED<===");
 		
 		test.log(Status.FAIL, result.getThrowable());
-		
-		
 
 	}
 
@@ -107,6 +108,92 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	@Override
 	public void onFinish(ITestContext context) {
 		// TODO Auto-generated method stub
+	}**/
+
+public static ExtentReports report;
+
+	@Override
+	public void onStart(ISuite suite) {
+		System.out.println("Report configuration");
+
+		// Ensure report folder exists
+		new File("./AdvanceReport").mkdirs();
+
+		String time = new Date().toString().replace(" ", "").replace(":", "");
+
+		// Spark report config
+		ExtentSparkReporter spark = new ExtentSparkReporter("./AdvanceReport/report" + time + ".html");
+		spark.config().setDocumentTitle("WareHousePortal Report");
+		spark.config().setReportName("WHP Report");
+		spark.config().setTheme(Theme.DARK);
+
+		// Attach reporter
+		report = new ExtentReports();
+		report.attachReporter(spark);
+		report.setSystemInfo("OS", "Windows-7");
+		report.setSystemInfo("BROWSER", "CHROME-100");
 	}
-**/
+
+	@Override
+	public void onFinish(ISuite suite) {
+		System.out.println("Report backup");
+		report.flush();
+	}
+
+	@Override
+	public void onTestStart(ITestResult result) {
+		System.out.println("=======>" + result.getMethod().getMethodName() + ">=====START====");
+
+		ExtentTest test = report.createTest(result.getMethod().getMethodName());
+		UtilityClassObject.setTest(test);
+
+		UtilityClassObject.getTest().log(Status.INFO, result.getMethod().getMethodName() + " ===> STARTED <===");
+	}
+
+	@Override
+	public void onTestSuccess(ITestResult result) {
+		System.out.println("=======>" + result.getMethod().getMethodName() + ">=====END====");
+		UtilityClassObject.getTest().log(Status.PASS, result.getMethod().getMethodName() + " ===> COMPLETED <===");
+	}
+
+	@Override
+	public void onTestFailure(ITestResult result) {
+		String testName = result.getMethod().getMethodName();
+
+		// Take screenshot
+		TakesScreenshot edriver = (TakesScreenshot) UtilityClassObject.getDriver();
+		String filePath = edriver.getScreenshotAs(OutputType.BASE64);
+
+		String time = new Date().toString().replace(" ", "").replace(":", "");
+
+		UtilityClassObject.getTest().addScreenCaptureFromBase64String(filePath, testName + "_" + time);
+		UtilityClassObject.getTest().log(Status.FAIL, testName + " ===> FAILED <===");
+		UtilityClassObject.getTest().log(Status.FAIL, result.getThrowable());
+	}
+
+	@Override
+	public void onTestSkipped(ITestResult result) {
+		UtilityClassObject.getTest().log(Status.SKIP, result.getThrowable());
+	}
+
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		// Not implemented
+	}
+
+	@Override
+	public void onTestFailedWithTimeout(ITestResult result) {
+		onTestFailure(result);
+	}
+
+	@Override
+	public void onStart(ITestContext context) {
+		// Not implemented
+	}
+
+	@Override
+	public void onFinish(ITestContext context) {
+		// Not implemented
+	}
+
 }
