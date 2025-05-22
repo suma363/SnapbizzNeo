@@ -2,6 +2,7 @@ package inventoryModule;
 
 import java.time.Duration;
 
+import ObjectRepository.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,10 +11,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import BaseClass.BaseClass;
 import FileUtility.ExcelUtility;
-import ObjectRepository.AddProducts_Page;
-import ObjectRepository.CataloguePage;
-import ObjectRepository.HomePage;
-import ObjectRepository.InventoryMenu_Page;
 import WebDriverUtility.JavaUtility;
 import WebDriverUtility.WebDriverUtility;
  //@Listeners(ListenerUtility.ListenerImpClass.class)
@@ -68,11 +65,27 @@ public class AddProductsToStore_Test extends BaseClass {
 			AddProducts_Page ap = new AddProducts_Page(driver);
 			ap.addProduct(barcode, mrp, prodName, purPrice, uom, SP1, qty, gst, category, subCat);
 		}
-		
-		//validations 
-//		String expected = String.valueOf(rowCount-1);
-//		String actual = cp.getInventoryCount().getText().trim();
-//		Assert.assertEquals(actual, expected, "Inventory count match after adding products.");
+		String ivnCount= cp.getInventoryCount().getText();
+		System.out.println(" Inventory count is : "+ ivnCount);
+
+		//Check the inventory count in stock
+		ip.getStockMdl().click();
+		Thread.sleep(500);
+
+		// Click dropdown and select store
+		StockPage sp= new StockPage(driver);
+		wu.waitForElementTobeClickable(driver, sp.getSelectStoreIdDrpdwn());
+		sp.getSelectStoreIdDrpdwn().click();
+		Thread.sleep(1000);
+
+		wu.waitForElementPresent(driver, sp.getStoreOption());
+		wu.waitForElementTobeClickable(driver, sp.getStoreOption());
+		sp.getStoreOption().click();
+
+		String ivnCountInStock= sp.getInventoryCount().getText();
+		System.out.println("Store inventory count is : "+ ivnCountInStock);
+
+
 
 	}
 }

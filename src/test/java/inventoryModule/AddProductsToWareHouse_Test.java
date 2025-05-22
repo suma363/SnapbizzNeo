@@ -1,16 +1,14 @@
 package inventoryModule;
 
 import java.time.Duration;
+
+import ObjectRepository.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import BaseClass.BaseClass;
 import FileUtility.ExcelUtility;
-import ObjectRepository.AddProducts_Page;
-import ObjectRepository.CataloguePage;
-import ObjectRepository.HomePage;
-import ObjectRepository.InventoryMenu_Page;
 import WebDriverUtility.JavaUtility;
 import WebDriverUtility.WebDriverUtility;
 
@@ -55,7 +53,7 @@ public class AddProductsToWareHouse_Test extends BaseClass {
 			String category = eu.getDataFromExcel("wareHouseProducts", i, 5);
 			String subCat = eu.getDataFromExcel("wareHouseProducts", i, 6);
 
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".v-overlay__scrim")));
 
 			// Re-open the modal each time
@@ -67,6 +65,25 @@ public class AddProductsToWareHouse_Test extends BaseClass {
 			ap.addProduct(barcode, mrp, prodName, purPrice, uom, SP1, qty, gst, category, subCat);
 					
 		}
+
+		String ivnCount= cp.getInventoryCount().getText();
+		System.out.println("WareHouse inventory count is : "+ ivnCount);
+
+		ip.getStockMdl().click();
+		Thread.sleep(500);
+
+		// Step 3: Click dropdown and select store
+		StockPage sp= new StockPage(driver);
+		wu.waitForElementTobeClickable(driver, sp.getSelectStoreIdDrpdwn());
+		sp.getSelectStoreIdDrpdwn().click();
+		Thread.sleep(1000);
+
+		wu.waitForElementPresent(driver, sp.getWareHouseOption());
+		wu.waitForElementTobeClickable(driver, sp.getWareHouseOption());
+		sp.getWareHouseOption().click();
+
+		String ivnCountInStock= sp.getInventoryCount().getText();
+		System.out.println("WareHouse Stock inventory count is : "+ ivnCountInStock);
 	}
 
 }
