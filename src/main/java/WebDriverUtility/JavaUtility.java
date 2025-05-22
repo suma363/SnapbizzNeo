@@ -9,7 +9,7 @@ public class JavaUtility {
 	
 	public int getRandomNumber() {
 		Random random = new Random();
-		int randomNumber = random.nextInt(700);
+		int randomNumber = random.nextInt(1000);
 		return randomNumber;
 				
 	}
@@ -23,7 +23,14 @@ public class JavaUtility {
 		return date;
 		
 	}
-	
+
+	public String getTodayDayOfMonth() {
+		Date dateObj = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("d");
+		return sdf.format(dateObj);
+	}
+
+
 	public String getRequiredDateyyyyMMdd(int days) {
 			
 		Date dateObj = new Date();

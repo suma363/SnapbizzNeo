@@ -86,15 +86,15 @@ public class BaseClass {
 
 		@AfterMethod(groups = {"smokeTest", "regressionTest"})
 		public void configAM() {
-			System.out.println("Logout");
-			DashboardPage dp = new DashboardPage(driver);
-			dp.logout();
+//			System.out.println("Logout");
+//			DashboardPage dp = new DashboardPage(driver);
+//			dp.logout();
 		}
 
 		@AfterClass(groups = {"smokeTest", "regressionTest"})
 		public void configAC() {
-			System.out.println("===Close the browser===");
-			driver.quit();
+//			System.out.println("===Close the browser===");
+//			driver.quit();
 		}
 		
 		@AfterSuite(groups = {"smokeTest", "regressionTest"})

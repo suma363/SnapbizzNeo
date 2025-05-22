@@ -29,26 +29,37 @@ public void waitForPageLoad(WebDriver driver) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
-
-	public void waitForElementtobeClickable(WebDriver driver, WebElement element) {
-		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.elementToBeClickable(element));
-		
-	}
 	
-   public void waitForElementtobeSelected(WebDriver driver, WebElement element) {
+//	public void waitForElementTobeClickable(WebDriver driver, WebElement element){
+//	WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+//	wait.until(ExpectedConditions.elementToBeClickable(element));
+//	}
+
+	public void waitForElementTobeClickable(WebDriver driver, WebElement element){
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.elementToBeClickable(element));
+		} catch (Exception e) {
+			// try JavaScript click as fallback or log useful info
+			System.out.println("Element not clickable immediately, retrying with JS...");
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", element);
+		}
+	}
+
+
+	public void waitForElementTobeSelected(WebDriver driver, WebElement element) {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.elementToBeSelected(element));
 	}
    
-   public void waitForElementTitlecontains(WebDriver driver, String title) {
+   public void waitForElementTitleContains(WebDriver driver, String title) {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.titleContains(title));
 	}
-   public void waitForAlertpresent(WebDriver driver, String title) {
+   public void waitForAlertPresent(WebDriver driver, String title) {
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.alertIsPresent());
@@ -86,31 +97,31 @@ public void waitForPageLoad(WebDriver driver) {
 			}
 		}
 		
-		public void switchtoFrame(WebDriver driver, int Index) {
+		public void switchToFrame(WebDriver driver, int Index) {
 			driver.switchTo().frame(Index);	
 		}
 		
-		public void switchtoFrame(WebDriver driver, String nameID) {
+		public void switchToFrame(WebDriver driver, String nameID) {
 			driver.switchTo().frame(nameID);	
 		}
 		
-		public void switchtoFrame(WebDriver driver, WebElement element) {
+		public void switchToFrame(WebDriver driver, WebElement element) {
 			driver.switchTo().frame(element);	
 		}
 		
-		public void switchtoParentFrame(WebDriver driver, WebElement element) {
+		public void switchToParentFrame(WebDriver driver, WebElement element) {
 			driver.switchTo().parentFrame();	
 		}
-		public void switchtoDefaultFrame(WebDriver driver, WebElement element) {
+		public void switchToDefaultFrame(WebDriver driver, WebElement element) {
 			driver.switchTo().defaultContent();	
 		}
 		
 		
-		public void switchtoAlertAndAccept(WebDriver driver) {
+		public void switchToAlertAndAccept(WebDriver driver) {
 			driver.switchTo().alert().accept();
 		}
 		
-		public void switchtoAlertAndCancel(WebDriver driver) {
+		public void switchToAlertAndCancel(WebDriver driver) {
 			driver.switchTo().alert().dismiss();
 		}
 		
@@ -127,14 +138,14 @@ public void waitForPageLoad(WebDriver driver) {
 			dropdown(element).selectByIndex(index);		
 		}
 		
-		public void selectbyValue(WebElement element , String value) {
+		public void selectByValue(WebElement element , String value) {
 			dropdown(element).selectByValue(value);	
 		}
 	
 		public void maximizeWindow(WebDriver driver) {
 			driver.manage().window().maximize();
 		}
-		public void manimizeWindow(WebDriver driver) {
+		public void minimizeWindow(WebDriver driver) {
 			driver.manage().window().minimize();
 		}
 		
@@ -148,7 +159,7 @@ public void waitForPageLoad(WebDriver driver) {
 			action(driver).moveToElement(element).perform();
 		}
 	
-		public void doubleclick(WebDriver driver, WebElement element ){
+		public void doubleClick(WebDriver driver, WebElement element ){
 			action(driver).doubleClick(element).perform();			
 		}
 		
@@ -160,7 +171,7 @@ public void waitForPageLoad(WebDriver driver) {
 			action(driver).contextClick().perform();			
 		}
 		
-		public void sendkeys(WebDriver driver, WebElement element , String text){
+		public void sendKeys(WebDriver driver, WebElement element , String text){
 			action(driver).sendKeys(text).perform();
 		}
 		

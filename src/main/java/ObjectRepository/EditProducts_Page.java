@@ -136,7 +136,7 @@ public class EditProducts_Page {
          getSp1TxtBox().sendKeys(Keys.CONTROL, "a", Keys.DELETE);
          getSp1TxtBox().sendKeys(upSp1);
 
-         wu.waitForElementtobeClickable(driver, getUpdateBtn());
+         wu.waitForElementTobeClickable(driver, getUpdateBtn());
          getUpdateBtn().click();
     }
 

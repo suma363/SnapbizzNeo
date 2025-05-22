@@ -51,7 +51,7 @@ public class DashboardPage {
 		//Action for logout
 				public void logout() {
 					profileIcon.click();
-					wu.waitForElementtobeClickable(driver, logoutBtn);
+					wu.waitForElementTobeClickable(driver, logoutBtn);
 					logoutBtn.click();
 				}
 	

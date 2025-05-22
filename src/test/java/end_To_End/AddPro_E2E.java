@@ -32,7 +32,7 @@ public class AddPro_E2E extends BaseClass{
 
 		// Step 3: Click dropdown and select store
 		CataloguePage cp = new CataloguePage(driver);
-		wu.waitForElementtobeClickable(driver, cp.getSelectStoreIdDrpdwn());
+		wu.waitForElementTobeClickable(driver, cp.getSelectStoreIdDrpdwn());
 		cp.getSelectStoreIdDrpdwn().click();
 
 		wu.waitForElementPresent(driver, cp.getStoreOption());
