@@ -83,7 +83,7 @@ public class CreatePurchase_Page {
     private WebElement sellingPrice;
 
     @FindBy(xpath="//div[@class='v-field v-field--active v-field--appended v-field--center-affix v-field--dirty v-field--no-label v-field--variant-outlined v-theme--light rounded-lg v-locale--is-ltr']//input")
-    private WebElement gst;
+    private WebElement gstDrpDwn;
 
     @FindBy(xpath="//input[@max='100' and  @class='v-field__input']")
     private WebElement flatDisc;
@@ -97,7 +97,7 @@ public class CreatePurchase_Page {
     @FindBy(xpath="//span[text()='Cancel']")
     private WebElement cancelBtn;
 
-    @FindBy(xpath="//span[text()='Print & Save']")
+    @FindBy(xpath="//span[text()='Print & Send']/ancestor::button")
     private WebElement printAndSave;
 
     @FindBy(xpath="//p[text()='Net Amount:']/ancestor::div[@class='v-list-item v-theme--light v-list-item--density-compact v-list-item--one-line rounded-0 v-list-item--variant-text px-0']/descendant::p[2]")
@@ -159,8 +159,9 @@ public class CreatePurchase_Page {
         return sellingPrice;
     }
 
-    public WebElement getGst() {
-        return gst;
+
+    public WebElement getGstDrpDwn() {
+        return gstDrpDwn;
     }
 
     public WebElement getFlatDisc() {

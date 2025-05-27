@@ -4,6 +4,8 @@ import BaseClass.BaseClass;
 import FileUtility.ExcelUtility;
 import ObjectRepository.*;
 import WebDriverUtility.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class CreatePurchaseInWH_Test extends BaseClass {
@@ -12,14 +14,14 @@ public class CreatePurchaseInWH_Test extends BaseClass {
     JavaUtility ju = new JavaUtility();
 
     @Test
-    public void addSingleDistributor() throws Throwable {
+    public void createPurchaseForWarehouse() throws Throwable {
         wu.waitForPageLoad(driver);
 
-        /* Step 1: Navigate to purchase entry module */
+        // Step 1: Navigate to purchase entry module
         HomePage hp = new HomePage(driver);
         hp.getPurchaseEntryDrpdwn().click();
 
-        /* Step 2: Create puchase entry */
+        // Step 2: Create purchase entry
         PurchaseEntryMenu_Page pp = new PurchaseEntryMenu_Page(driver);
         pp.getCreatePurchaseEntryMdl().click();
         Thread.sleep(1000);
@@ -38,22 +40,22 @@ public class CreatePurchaseInWH_Test extends BaseClass {
         wu.waitForElementTobeClickable(driver, cp.getAddDistPopupYes());
         cp.getAddDistPopupYes().click();
 
-        //Read data from excel and add new Distributor
+        //Read data from Excel and add new Distributor
         int row = 1;
             String name = eu.getDataFromExcel("distributorSheet", row, 0);
-           // String phnNo = eu.getDataFromExcel("distributorSheet", row, 1);
+           //String phnNo = eu.getDataFromExcel("distributorSheet", row, 1);
         String basePhone = eu.getDataFromExcel("distributorSheet", row, 1); // 7 digits
         String randomPart = String.valueOf((int)(Math.random() * 1000)); // 3 digits
         String phnNo = (basePhone + randomPart).substring(0, 10); // make it exactly 10 digits
 
         String address = eu.getDataFromExcel("distributorSheet", row, 2);
-            String gstin = eu.getDataFromExcel("distributorSheet", row, 3);
+            String gstIn = eu.getDataFromExcel("distributorSheet", row, 3);
             String landLinNo = eu.getDataFromExcel("distributorSheet", row, 4)+ ju.getRandomNumber();
             String email = eu.getDataFromExcel("distributorSheet", row, 5);
 
             //Add distributors
             AddDistributors_Page adp = new AddDistributors_Page(driver);
-            adp.addDistributorWithAllDetails(name, phnNo, address, gstin, landLinNo, email);
+            adp.addDistributorWithAllDetails(name, phnNo, address, gstIn, landLinNo, email);
 
             //Select today's date
             cp.getInvoiceDate().click(); // open the calendar widget
@@ -80,18 +82,28 @@ public class CreatePurchaseInWH_Test extends BaseClass {
 
         // Add product details to the modal
         AddProducts_Page ap = new AddProducts_Page(driver);
-        ap.addProduct(barcode, mrp, prodName, purPrice, uom, SP1, qty, gst, category, subCat);
+        ap.addProduct(barcode,mrp,prodName,purPrice,uom,SP1,qty,gst,category,subCat);
 
         //include gst
         cp.getIncludeGst().click();
+        Thread.sleep(1000);
+
+        // Scroll to bottom of the page
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
         String netAmt = cp.getNetAmount().getText();
-
         System.out.println("Net Amount is :" + netAmt);
 
-        cp.getPrintAndSave().click();
+        Thread.sleep(1000);
+        WebElement printAndSaveBtn = cp.getPrintAndSave();
+        wu.waitForElementTobeClickable(driver, printAndSaveBtn);
 
-        driver.close();
+       // Use JS click in case normal click is being blocked silently
+        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+        jsExec.executeScript("arguments[0].click();", printAndSaveBtn);
+
+        //driver.close();
 
 
     }

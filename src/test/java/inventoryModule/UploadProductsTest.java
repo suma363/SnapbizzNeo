@@ -15,7 +15,6 @@ import WebDriverUtility.WebDriverUtility;
 
 public class UploadProductsTest extends BaseClass {	
 	WebDriverUtility wu= new WebDriverUtility();
-	/**
 	@Test
 	public void uploadProducts() throws Throwable {
 		wu.waitForPageLoad(driver);
@@ -34,22 +33,23 @@ public class UploadProductsTest extends BaseClass {
 		up.getSelectStoreIdDrpdwn().click();
 		Thread.sleep(100);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(up.getAutoSugg())).click();
+        wait.until(ExpectedConditions.visibilityOf(up.getStoreOption())).click();
 
         up.getUploadFile().click();
         Thread.sleep(500); 
         
         // Step 4: Upload the file using hidden input
-        String filePath = System.getProperty("user.dir") + "/src/test/resources/whportal_sample_upload (1).csv";
+       // String filePath = System.getProperty("user.dir") + "/src/test/resources/whportal_sample_upload (1).csv";
 
-        //String filePath ="./src/test/resources/whportal_sample_upload (1).csv";
+        String filePath =System.getProperty("user.dir") + "./src/test/resources/warehouse-82_Products.csv";
 
         //String filePath = "./src/test/resources/whportal_sample_upload (1).csv";
         up.getFileUploadInput().sendKeys(filePath);
         
         up.getUploadCsvFileBtn().click();
-	}**/
-	
+	}
+
+	/**
 	@Test
 	    public void uploadProducts() throws Throwable {
 	        wu.waitForPageLoad(driver);
@@ -85,6 +85,6 @@ public class UploadProductsTest extends BaseClass {
 	        // Optional: Add assertion or wait for success message
 	        // e.g., wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Upload successful']")));
 	    }
-	       
+	  **/
 	        
 }
