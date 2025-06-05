@@ -128,11 +128,9 @@ public class CreatePurchase_E2E extends BaseClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 
 
-
         Thread.sleep(1000);
         //include gst
         //purPage.getIncludeGst().click();
-
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
