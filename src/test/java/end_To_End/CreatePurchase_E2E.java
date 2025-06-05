@@ -137,7 +137,6 @@ public class CreatePurchase_E2E extends BaseClass {
 
         String netAmt = purPage.getNetAmount().getText();
         System.out.println("Net Amount is :" + netAmt);
-
         Thread.sleep(1000);
        // WebElement printAndSaveBtn = purPage.getPrintAndSave();
         wu.waitForElementTobeClickable(driver, purPage.getPrintAndSave());
