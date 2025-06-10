@@ -141,6 +141,7 @@ public class AddProducts_Page {
 		getGstDropDown().sendKeys(gst);
 		getGstDropDown().sendKeys(Keys.ENTER);
 
+		wu.waitForElementTobeClickable(driver, getCategoryDropDown());
 		getCategoryDropDown().click();
 		getCategoryDropDown().sendKeys(catogory);
 		getCategoryDropDown().sendKeys(Keys.ENTER);

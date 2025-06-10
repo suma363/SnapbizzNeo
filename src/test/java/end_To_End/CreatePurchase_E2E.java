@@ -139,8 +139,8 @@ public class CreatePurchase_E2E extends BaseClass {
         System.out.println("Net Amount is :" + netAmt);
         Thread.sleep(1000);
        // WebElement printAndSaveBtn = purPage.getPrintAndSave();
-        wu.waitForElementTobeClickable(driver, purPage.getPrintAndSave());
-        purPage.getPrintAndSave().click();
+        wu.waitForElementTobeClickable(driver, purPage.getPrintAndSendInStore());
+        purPage.getPrintAndSendInStore().click();
 
 
         // Use JS click in case normal click is being blocked silently

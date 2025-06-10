@@ -5,7 +5,6 @@ import FileUtility.ExcelUtility;
 import ObjectRepository.*;
 import WebDriverUtility.*;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class CreatePurchaseInWH_Test extends BaseClass {
@@ -41,7 +40,7 @@ public class CreatePurchaseInWH_Test extends BaseClass {
         cp.getAddDistPopupYes().click();
 
         //Read data from Excel and add new Distributor
-        int row = 1;
+        int row = 2;
             String name = eu.getDataFromExcel("distributorSheet", row, 0);
            //String phnNo = eu.getDataFromExcel("distributorSheet", row, 1);
         String basePhone = eu.getDataFromExcel("distributorSheet", row, 1); // 7 digits
@@ -68,7 +67,7 @@ public class CreatePurchaseInWH_Test extends BaseClass {
             cp.getSearchByProdName().sendKeys("abc");
 
             //Search product if the product is not there add it
-        int prodRow = 1;
+        int prodRow = 2;
         String barcode = eu.getDataFromExcel("wareHouseProducts", prodRow, 0) + ju.getRandomNumber();
         String mrp = eu.getDataFromExcel("wareHouseProducts", prodRow, 9);
         String prodName = eu.getDataFromExcel("wareHouseProducts", prodRow, 3) + ju.getRandomNumber();
@@ -82,11 +81,10 @@ public class CreatePurchaseInWH_Test extends BaseClass {
 
         // Add product details to the modal
         AddProducts_Page ap = new AddProducts_Page(driver);
-        ap.addProduct(barcode,mrp,prodName,purPrice,uom,SP1,qty,gst,category,subCat);
+        ap.addProduct(barcode, mrp, prodName, purPrice, uom, SP1, qty, gst, category, subCat);
 
         //include gst
         cp.getIncludeGst().click();
-        Thread.sleep(1000);
 
         // Scroll to bottom of the page
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -96,17 +94,10 @@ public class CreatePurchaseInWH_Test extends BaseClass {
         System.out.println("Net Amount is :" + netAmt);
 
         Thread.sleep(1000);
-        WebElement printAndSaveBtn = cp.getPrintAndSave();
-        wu.waitForElementTobeClickable(driver, printAndSaveBtn);
+        cp.getPrintAndSaveInWh().click();
 
-       // Use JS click in case normal click is being blocked silently
-        JavascriptExecutor jsExec = (JavascriptExecutor) driver;
-        jsExec.executeScript("arguments[0].click();", printAndSaveBtn);
-
-        //driver.close();
-
+        driver.close();
 
     }
-
 
 }

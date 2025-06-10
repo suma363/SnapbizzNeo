@@ -2,7 +2,6 @@ package inventoryModule;
 
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +14,7 @@ import WebDriverUtility.WebDriverUtility;
 
 public class UploadProductsTest extends BaseClass {	
 	WebDriverUtility wu= new WebDriverUtility();
+	/**
 	@Test
 	public void uploadProducts() throws Throwable {
 		wu.waitForPageLoad(driver);
@@ -41,15 +41,16 @@ public class UploadProductsTest extends BaseClass {
         // Step 4: Upload the file using hidden input
        // String filePath = System.getProperty("user.dir") + "/src/test/resources/whportal_sample_upload (1).csv";
 
-        String filePath =System.getProperty("user.dir") + "./src/test/resources/warehouse-82_Products.csv";
+        //String filePath =System.getProperty("user.dir") + "./src/test/resources/whportal_sample_upload data.csv";
 
-        //String filePath = "./src/test/resources/whportal_sample_upload (1).csv";
+       String filePath = "./src/test/resources/whportal_sample_upload data.csv";
+
         up.getFileUploadInput().sendKeys(filePath);
         
         up.getUploadCsvFileBtn().click();
 	}
 
-	/**
+	**/
 	@Test
 	    public void uploadProducts() throws Throwable {
 	        wu.waitForPageLoad(driver);
@@ -74,7 +75,7 @@ public class UploadProductsTest extends BaseClass {
 	        Thread.sleep(1000); // Give time for input to appear
 
 	        // Step 4: Upload file using input tag
-	        String filePath = System.getProperty("user.dir") + "./src/test/resources/whportal_sample_upload (1).csv";
+	        String filePath = System.getProperty("user.dir") + "./src/test/resources/whportal_sample_upload data.csv";
 	        WebElement fileInput = up.getFileUploadInput();
 	        fileInput.sendKeys(filePath);
 	        Thread.sleep(2000); // Let upload process (optional)
@@ -85,6 +86,6 @@ public class UploadProductsTest extends BaseClass {
 	        // Optional: Add assertion or wait for success message
 	        // e.g., wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Upload successful']")));
 	    }
-	  **/
+
 	        
 }

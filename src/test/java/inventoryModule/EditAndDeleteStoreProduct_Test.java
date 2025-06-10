@@ -55,7 +55,7 @@ public class EditAndDeleteStoreProduct_Test extends BaseClass {
         String purPrice = eu.getDataFromExcel("productSheet", row, 12);
         String uom = eu.getDataFromExcel("productSheet", row, 9);
         String SP1 = eu.getDataFromExcel("productSheet", row, 13);
-        String qty = eu.getDataFromExcel("productSheet", row, 18);
+        String qty = eu.getDataFromExcel("productSheet", row, 10);
         String gst = eu.getDataFromExcel("productSheet", row, 16);
         String category = eu.getDataFromExcel("productSheet", row, 7);
         String subCat = eu.getDataFromExcel("productSheet", row, 8);
@@ -69,12 +69,20 @@ public class EditAndDeleteStoreProduct_Test extends BaseClass {
         wu.slowType(cp.getSearchProduct(), prodName.trim(), 200); // 150ms delay per character
         cp.getSearchProduct().sendKeys(Keys.ENTER);
 
+        /**Thread.sleep(1000);
+        WebElement productRow = driver.findElement(By.xpath("//td[text()='" + barcode + "']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", productRow);
+        Thread.sleep(500); // Wait for scroll to complete
+
+
         // Step 8: Capture the product's status using the generated barcode
         String xpath = "//td[text()='" + barcode + "']/ancestor::tr//div[contains(@class,'v-chip__content')]";
         String status = driver.findElement(By.xpath(xpath)).getText();
 
         // Print the barcode and its status
         System.out.println("Barcode: " + barcode + " status is "+ status);
+
+         **/
 
         // Step 9: Scroll to the product row and click the Edit button
         WebElement productRow = driver.findElement(By.xpath("//td[text()='" + barcode + "']"));

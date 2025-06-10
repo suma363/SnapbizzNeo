@@ -21,7 +21,7 @@ public class FailCreatePurchase_Test extends BaseClass {
         HomePage hp = new HomePage(driver);
         hp.getPurchaseEntryDrpdwn().click();
 
-        /* Step 2: Create puchase entry */
+        /* Step 2: Create purchase entry */
         PurchaseEntryMenu_Page pp = new PurchaseEntryMenu_Page(driver);
         pp.getCreatePurchaseEntryMdl().click();
         Thread.sleep(1000);
@@ -92,7 +92,7 @@ public class FailCreatePurchase_Test extends BaseClass {
 
         System.out.println(netAmt);
 
-        cp.getPrintAndSave().click();
+        cp.getPrintAndSaveInWh().click();
 
         driver.close();
 

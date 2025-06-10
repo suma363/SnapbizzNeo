@@ -97,11 +97,19 @@ public class CreatePurchase_Page {
     @FindBy(xpath="//span[text()='Cancel']")
     private WebElement cancelBtn;
 
+    @FindBy(xpath="//span[text()='Print & Save']/ancestor::button")
+    private WebElement printAndSaveInWh;
+
     @FindBy(xpath="//span[text()='Print & Send']/ancestor::button")
-    private WebElement printAndSave;
+    private WebElement printAndSendInStore;
+
 
     @FindBy(xpath="//p[text()='Net Amount:']/ancestor::div[@class='v-list-item v-theme--light v-list-item--density-compact v-list-item--one-line rounded-0 v-list-item--variant-text px-0']/descendant::p[2]")
     private WebElement netAmount;
+
+    public WebElement getPrintAndSendInStore() {
+        return printAndSendInStore;
+    }
 
     public WebElement getNetAmount() {
         return netAmount;
@@ -180,7 +188,7 @@ public class CreatePurchase_Page {
         return cancelBtn;
     }
 
-    public WebElement getPrintAndSave() {
-        return printAndSave;
+    public WebElement getPrintAndSaveInWh() {
+        return printAndSaveInWh;
     }
 }

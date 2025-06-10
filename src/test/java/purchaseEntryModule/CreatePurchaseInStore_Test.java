@@ -41,11 +41,11 @@ public class CreatePurchaseInStore_Test extends BaseClass {
         cp.getAddDistPopupYes().click();
 
         //Read data from Excel and add new Distributor
-        int row = 1;
+        int row = 2;
         String name = eu.getDataFromExcel("distributorSheet", row, 0);
         // String phnNo = eu.getDataFromExcel("distributorSheet", row, 1);
         String basePhone = eu.getDataFromExcel("distributorSheet", row, 1); // 7 digits
-        String randomPart = String.valueOf((int)(Math.random() * 1000)); // 3 digits
+        String randomPart = String.valueOf((int)(Math.random() * 5000)); // 3 digits
         String phnNo = (basePhone + randomPart).substring(0, 10); // make it exactly 10 digits
 
         String address = eu.getDataFromExcel("distributorSheet", row, 2);
@@ -68,14 +68,14 @@ public class CreatePurchaseInStore_Test extends BaseClass {
         cp.getSearchByProdName().sendKeys("abc");
 
         //Search product if the product is not there add it
-        int prodRow = 1;
+        int prodRow = 2;
         String barcode = eu.getDataFromExcel("productSheet", prodRow, 0) + ju.getRandomNumber();
         String mrp = eu.getDataFromExcel("productSheet", prodRow, 11);
         String prodName = eu.getDataFromExcel("productSheet", prodRow, 3) + ju.getRandomNumber();
         String purPrice = eu.getDataFromExcel("productSheet", prodRow, 12);
         String uom = eu.getDataFromExcel("productSheet", prodRow, 9);
         String SP1 = eu.getDataFromExcel("productSheet", prodRow, 13);
-        String qty = eu.getDataFromExcel("productSheet", prodRow, 18);
+        String qty = eu.getDataFromExcel("productSheet", prodRow, 10);
         String gst = eu.getDataFromExcel("productSheet", prodRow, 16);
         String category = eu.getDataFromExcel("productSheet", prodRow, 7);
         String subCat = eu.getDataFromExcel("productSheet", prodRow, 8);
@@ -95,8 +95,9 @@ public class CreatePurchaseInStore_Test extends BaseClass {
         String netAmt = cp.getNetAmount().getText();
         System.out.println("Net Amount is :" + netAmt);
 
-        Thread.sleep(1000);
-        cp.getPrintAndSave().click();
+        Thread.sleep(500);
+       wu.waitForElementTobeClickable(driver,cp.getPrintAndSendInStore());
+        cp.getPrintAndSendInStore().click();
 
         driver.close();
     }
